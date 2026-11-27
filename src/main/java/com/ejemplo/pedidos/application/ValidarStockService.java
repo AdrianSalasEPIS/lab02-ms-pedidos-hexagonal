@@ -1,13 +1,17 @@
 package com.ejemplo.pedidos.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ValidarStockService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ValidarStockService.class);
+
     public boolean tieneStock(int stock, int cantidad) {
-        System.out.println("Validando stock: " + stock + " / " + cantidad);
-        if (stock >= cantidad) {
-            return true;
-        } else {
-            return false;
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("Cantidad invalida");
         }
+        LOG.debug("Validando stock: {} / {}", stock, cantidad);
+        return stock >= cantidad;
     }
 }
